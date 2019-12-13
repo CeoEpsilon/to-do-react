@@ -1,5 +1,6 @@
 import React from "react"
 import TodoListItem from "../todo-list-item/TodoListItem"
+import "./TodoList.css"
 
 function TodoList(props) {
     let items = props.todoList.map( (item,index) => {
@@ -9,8 +10,8 @@ function TodoList(props) {
     })
     console.log("TodoList")
     return (    
-        <div>
-            <ul>{items}</ul>
+        <div className="TodoList">
+            <ul className="list-group">{items}</ul>
         </div>
     )
 }
