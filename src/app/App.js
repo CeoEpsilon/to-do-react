@@ -36,7 +36,9 @@ class App extends React.Component {
     this.setState({
         todoList : todoList
     })
+    
     console.log("todoList="+this.state.todoList)
+
   } 
 
   removeIte(index) {
