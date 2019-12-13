@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import TodoList from "../components/todo-list/TodoList"
 import TodoHeader from "../components/todo-header/TodoHeader"
-import TodoForm from "../components/todo-form/TodoForm"
+
 
 /*
 Todo app structure
@@ -53,8 +53,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <TodoHeader />
-        <TodoForm addItem={this.addItem} />
-        <TodoList todoList={this.state.todoList}/>
+        <TodoList todoList={this.state.todoList} addItem={this.addItem}/>
       </div>
     );
   }
