@@ -3,7 +3,7 @@ import React from "react"
 
 function TodoListItem(props) {
     return (
-        <li id={props.index}>{props.item}
+        <li className="list-group-item" id={props.index}>{props.item}
         </li>
     )
 }
