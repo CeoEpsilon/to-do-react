@@ -18,6 +18,9 @@ class TodoForm extends React.Component {
         console.log("this.props.addItem="+this.props.addItem) 
 
         console.log(this.state.value)
+        if (this.state.value.length === 0) {
+            return;
+        }
 
         this.props.addItem(this.state.value)
         this.setState ({
