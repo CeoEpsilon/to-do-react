@@ -1,4 +1,5 @@
-import React from "react"
+import React from "react";
+import './TodoForm.css';
 
 
 
@@ -37,7 +38,7 @@ class TodoForm extends React.Component {
 
     render() {    
         return (
-            <form ref="form" onSubmit={this.onSubmit}>
+            <form ref="form" onSubmit={this.onSubmit} id="form">
                 <input type="text" id="task" onChange={this.onChange} value={this.state.value}></input>
             </form>
     )}

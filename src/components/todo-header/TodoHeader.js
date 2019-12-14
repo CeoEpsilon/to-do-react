@@ -4,7 +4,7 @@ import "./TodoHeader.css"
 function TodoHeader () {
     return (
         <div className="TodoHeader">
-             <h1 className="header">todos</h1>
+             <h1 className="header">Task List</h1>
         </div>
     )
 }
