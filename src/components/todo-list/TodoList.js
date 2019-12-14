@@ -6,7 +6,7 @@ import TodoForm from "../todo-form/TodoForm"
 function TodoList(props) {
     let items = props.todoList.map( (item,index) => {
         return (
-            <TodoListItem key={index} index={index} item={item} />
+            <TodoListItem key={index} index={index} item={item} removeItem={props.removeItem} />
         )
     })
     console.log("TodoList")
@@ -16,7 +16,7 @@ function TodoList(props) {
         <div className="TodoList">
 
             <ul className="list-group">
-                <li className="list-group-item"><TodoForm addItem={props.addItem} /></li>
+                <li className="list-group-item"><TodoForm addItem={props.addItem}  /></li>
                 {items}
             </ul>
         </div>
