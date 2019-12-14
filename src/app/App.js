@@ -24,6 +24,7 @@ class App extends React.Component {
   constructor(props) {
     super(props)
     this.addItem = this.addItem.bind(this)
+    this.removeItem = this.removeItem.bind(this)
     this.state = {
       todoList: todoList
     };
@@ -40,20 +41,27 @@ class App extends React.Component {
     console.log("todoList="+this.state.todoList)
 
   } 
-
-  removeIte(index) {
+  
+  removeItem(index) {
+    console.log("**removeItem="+index)
     let todoList = this.state.todoList
-    let newTodoList = todoList.slice(index,1)
+    console.log("***todoList="+ todoList)
+
+    todoList.splice(index,1)
+    console.log("After splice=" + todoList)
     this.setState({
-      todoList: newTodoList
+        todoList : todoList
     })
+
   }
+
+
  
   render() {
     return (
       <div className="App">
         <TodoHeader />
-        <TodoList todoList={this.state.todoList} addItem={this.addItem}/>
+        <TodoList todoList={this.state.todoList} addItem={this.addItem} removeItem={this.removeItem}/>
       </div>
     );
   }
