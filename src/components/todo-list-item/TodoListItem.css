@@ -1,0 +1,10 @@
+.task {
+    position: relative;
+    
+}
+
+.remove {
+    position: absolute;
+    margin-top: 7px;
+    right: 10px;
+}
