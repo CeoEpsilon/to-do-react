@@ -17,7 +17,9 @@ TodoApp
 		- TodoListItem #N
 */
 
-const todoList = ["Make the bad", "Wash my hands", "Eat","Walk the dog"];
+const todoList = []// ["Make the bad", "Wash my hands", "Eat","Walk the dog"];
+
+
 
 class App extends React.Component {
 
@@ -29,6 +31,8 @@ class App extends React.Component {
       todoList: todoList
     };
   }
+
+  
 
   addItem(item) {
     console.log("***addItem")
@@ -53,6 +57,44 @@ class App extends React.Component {
         todoList : todoList
     })
 
+  }
+
+  componentDidMount() {
+    fetch("http://localhost:8000/todolist/")
+      .then(res => { 
+        console.log("####"+res)
+        return res.json()
+      })
+      .then(
+        (result) => {
+
+          console.log(result)
+          console.log("$$$$$="+result)  
+          let items = result.map(item => item.todo)
+          console.log(items)
+          this.setState({
+            ...this.state,
+            isLoaded: true,
+            //todoList: result.items
+            todoList: items
+          });
+        },
+        // Note: it's important to handle errors here
+        // instead of a catch() block so that we don't swallow
+        // exceptions from actual bugs in components.
+        (error) => {
+          this.setState({
+            isLoaded: true,
+            error
+          });
+        }
+      )
+  }
+
+
+  listItem(data) {
+    console.log(data)
+    return data
   }
 
   render() {

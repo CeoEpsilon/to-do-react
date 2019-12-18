@@ -4,6 +4,8 @@ import "./TodoList.css"
 import TodoForm from "../todo-form/TodoForm"
 
 function TodoList(props) {
+    console.log("***TodoList")
+    console.log(props.todoList)
     let items = props.todoList.map( (item,index) => {
         return (
             <TodoListItem key={index} index={index} item={item} removeItem={props.removeItem} />

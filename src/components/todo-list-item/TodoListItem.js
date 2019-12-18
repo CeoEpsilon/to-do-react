@@ -8,8 +8,9 @@ import "./TodoListItem.css"
 
 function  TodoListItem (props) {
 
+
     return (
-        <li className="list-group-item " id={props.index}>{props.item}
+        <li className="list-group-item " id={props.item}>{props.item}
         <i className="remove m-b2" onClick={()=>props.removeItem(props.index) }>+</i>
         </li>
     )
