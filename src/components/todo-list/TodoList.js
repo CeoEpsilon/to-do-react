@@ -9,7 +9,7 @@ function TodoList(props) {
     console.log(props.todoList.length)
     console.log(props.cleanUpList)
     console.log("%%%%%%%%")
-    if(!props.todoList)
+    if(!props.todoList )
         return
     let items = props.todoList.map( (item,index) => {
         return (
