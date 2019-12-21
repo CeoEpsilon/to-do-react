@@ -18,7 +18,7 @@ function TodoList(props) {
         <div className="TodoList">
 
             <ul className="list-group">
-                <li className="list-group-item"><TodoForm addItem={props.addItem}  /></li>
+                <li className="list-group-item"><TodoForm addItem={props.addItem} createList={props.createList} deleteList={props.deleteList} /></li>
                 {items}
             </ul>
         </div>

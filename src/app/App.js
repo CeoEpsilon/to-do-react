@@ -17,8 +17,6 @@ TodoApp
 		- TodoListItem #N
 */
 
-const todoList = []// ["Make the bad", "Wash my hands", "Eat","Walk the dog"];
-
 
 
 class App extends React.Component {
@@ -27,8 +25,9 @@ class App extends React.Component {
     super(props)
     this.addItem = this.addItem.bind(this)
     this.removeItem = this.removeItem.bind(this)
+    this.deleteList = this.deleteList.bind(this)
     this.state = {
-      todoList: todoList
+      todoList: []
     };
   }
 
@@ -66,6 +65,73 @@ class App extends React.Component {
 
     })
 
+  }
+
+  deleteList(e) {
+    console.log("*******deleteList")
+    e.preventDefault()
+    fetch('https://assets.breatheco.de/apis/fake/todos/user/cleber', {
+      method: "PUT",
+      body: JSON.stringify([]),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(resp => {
+        console.log("&&&")
+        console.log(resp)
+        console.log(resp.ok); // will be true if the response is successfull
+        console.log(resp.status); // the status code = 200 or code = 400 etc.
+        //console.log(resp.text()); // will try return the exact result as string
+        return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
+    })
+    .then(data => {
+        //here is were your code should start after the fetch finishes
+        console.log("***** deleteList*****")
+        console.log(data); //this will print on the console the exact object received from the server
+        console.log(this)
+        console.log(this.state)
+        this.setState({
+          isLoaded: true,
+          todoList: []
+        });
+    
+    })
+    .catch(error => {
+        //error handling
+        console.log(error);
+    });
+  }
+
+  createList(e){
+    console.log("***createList")
+    e.preventDefault()
+
+    fetch('https://assets.breatheco.de/apis/fake/todos/user/cleber', {
+      method: "POST",
+      body: JSON.stringify([]),
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(resp => {
+        console.log("&&&")
+        console.log(resp)
+        console.log(resp.ok); // will be true if the response is successfull
+        console.log(resp.status); // the status code = 200 or code = 400 etc.
+        //console.log(resp.text()); // will try return the exact result as string
+        return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
+    })
+    .then(data => {
+        //here is were your code should start after the fetch finishes
+        console.log("***** createList*****")
+        console.log(data); //this will print on the console the exact object received from the server
+    
+    })
+    .catch(error => {
+        //error handling
+        console.log(error);
+    });
 
   }
 
@@ -87,7 +153,7 @@ class App extends React.Component {
     })
     .then(data => {
         //here is were your code should start after the fetch finishes
-        console.log("***** componentDidMount*****")
+        console.log("***** componentDidUpdate*****")
         console.log(data); //this will print on the console the exact object received from the server
     
     })
@@ -134,41 +200,6 @@ class App extends React.Component {
     });
   }
 
-
-  /*
-  componentDidMount() {
-    fetch("http://localhost:8000/todolist/")
-      .then(res => { 
-        console.log("####"+res)
-        return res.json()
-      })
-      .then(
-        (result) => {
-
-          console.log(result)
-          console.log("$$$$$="+result)  
-          let items = result.map(item => item.todo)
-          console.log(items)
-          this.setState({
-            ...this.state,
-            isLoaded: true,
-            //todoList: result.items
-            todoList: items
-          });
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          this.setState({
-            isLoaded: true,
-            error
-          });
-        }
-      )
-  }
-*/
-
   listItem(data) {
     console.log(data)
     return data
@@ -178,7 +209,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <TodoHeader />
-        <TodoList todoList={this.state.todoList} addItem={this.addItem} removeItem={this.removeItem}/>
+        <TodoList todoList={this.state.todoList} createList={this.createList} deleteList={this.deleteList} addItem={this.addItem} removeItem={this.removeItem}/>
         
       </div>
     );

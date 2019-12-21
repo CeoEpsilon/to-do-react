@@ -40,8 +40,14 @@ class TodoForm extends React.Component {
         return (
             <form ref="form" onSubmit={this.onSubmit} id="form">
                 <input type="text" id="task" onChange={this.onChange} value={this.state.value}></input>
+
+                <button type="button" id="clean" onClick={(e) => this.props.deleteList(e)} className="btn btn-warning clean">Clean up</button>
             </form>
     )}
 }
 
 export default TodoForm
+
+/*
+<button type="button" id="clean" onClick={(e) => this.props.createList(e)} className="btn btn-success">Create List</button>             
+<span/> */

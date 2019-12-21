@@ -1,3 +1,9 @@
 #task{
     border-radius: 5px;
+    display: inline-block;
+}
+
+.clean {
+    display: inline-block;]
+    width: 10px;
 }
