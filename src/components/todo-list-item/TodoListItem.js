@@ -10,7 +10,7 @@ function  TodoListItem (props) {
 
 
     return (
-        <li className="list-group-item " id={props.item}>{props.item}
+        <li className="list-group-item ">{props.item.label}
         <i className="remove m-b2" onClick={()=>props.removeItem(props.index) }>+</i>
         </li>
     )
