@@ -25,7 +25,9 @@ class App extends React.Component {
     super(props)
     this.addItem = this.addItem.bind(this)
     this.removeItem = this.removeItem.bind(this)
-    this.deleteList = this.deleteList.bind(this)
+    this.cleanUpList = this.cleanUpList.bind(this)
+    this.fechUpdate = this.fechUpdate.bind(this)
+    this.createList = this.createList.bind(this)
     this.state = {
       todoList: []
     };
@@ -36,6 +38,10 @@ class App extends React.Component {
   addItem(item) {
     console.log("***addItem")
     let todoList = this.state.todoList
+
+    if(todoList.length === 0) {
+      this.createList()
+    }
     const todoItem = {
       label:item,
       done:false
@@ -48,6 +54,7 @@ class App extends React.Component {
         todoList : todoList
     })
     
+    this.fechUpdate()
     console.log("todoList="+this.state.todoList)
 
   } 
@@ -64,15 +71,27 @@ class App extends React.Component {
         todoList : todoList
 
     })
-
+    this.fechUpdate()
   }
 
-  deleteList(e) {
-    console.log("*******deleteList")
+  cleanUpList(e) {
+    console.log("*******cleanUpList")
     e.preventDefault()
+    let todoList=[]
+    this.setState({
+      ...this.state,
+      isLoaded: true,
+      todoList: todoList
+    });
+    console.log("$$$$$$$$$")
+    console.log(this.state)
+    console.log(this.state.todoList)
+    console.log(todoList)
+    console.log("&&&&&&&&")
+
     fetch('https://assets.breatheco.de/apis/fake/todos/user/cleber', {
       method: "PUT",
-      body: JSON.stringify([]),
+      body: JSON.stringify(todoList),
       headers: {
         "Content-Type": "application/json"
       }
@@ -87,14 +106,9 @@ class App extends React.Component {
     })
     .then(data => {
         //here is were your code should start after the fetch finishes
-        console.log("***** deleteList*****")
+        console.log("***** cleanUpList*****")
         console.log(data); //this will print on the console the exact object received from the server
-        console.log(this)
         console.log(this.state)
-        this.setState({
-          isLoaded: true,
-          todoList: []
-        });
     
     })
     .catch(error => {
@@ -103,9 +117,9 @@ class App extends React.Component {
     });
   }
 
-  createList(e){
+  createList(){
     console.log("***createList")
-    e.preventDefault()
+
 
     fetch('https://assets.breatheco.de/apis/fake/todos/user/cleber', {
       method: "POST",
@@ -135,7 +149,9 @@ class App extends React.Component {
 
   }
 
-  componentDidUpdate() {
+  fechUpdate() {
+    console.log("****fechUpdate")
+    console.log(this.state.todoList)
     fetch('https://assets.breatheco.de/apis/fake/todos/user/cleber', {
       method: "PUT",
       body: JSON.stringify(this.state.todoList),
@@ -165,6 +181,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    console.log("componentDidMount")
     fetch('https://assets.breatheco.de/apis/fake/todos/user/cleber', {
       method: "GET",
       headers: {
@@ -172,7 +189,6 @@ class App extends React.Component {
       }
     })
     .then(resp => {
-        console.log("&&&")
         console.log(resp)
         console.log(resp.ok); // will be true if the response is successfull
         console.log(resp.status); // the status code = 200 or code = 400 etc.
@@ -209,7 +225,7 @@ class App extends React.Component {
     return (
       <div className="App">
         <TodoHeader />
-        <TodoList todoList={this.state.todoList} createList={this.createList} deleteList={this.deleteList} addItem={this.addItem} removeItem={this.removeItem}/>
+        <TodoList todoList={this.state.todoList} createList={this.createList} cleanUpList={this.cleanUpList} addItem={this.addItem} removeItem={this.removeItem}/>
         
       </div>
     );

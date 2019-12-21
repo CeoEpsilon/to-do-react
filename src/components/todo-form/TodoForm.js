@@ -8,7 +8,7 @@ class TodoForm extends React.Component {
         super(props)
         this.onSubmit = this.onSubmit.bind(this)
         this.onChange = this.onChange.bind(this)
-        
+
         this.state = {
             value:""
         }
@@ -42,7 +42,7 @@ class TodoForm extends React.Component {
             <form ref="form" onSubmit={this.onSubmit} id="form">
                 <input type="text" id="task" onChange={this.onChange} value={this.state.value}></input>
 
-                <button type="button" id="clean" onClick={(e) => this.props.deleteList(e)} className="btn btn-warning clean">Clean up</button>
+                <button type="button" id="clean" onClick={(e) => this.props.cleanUpList(e)} className="btn btn-warning clean">Clean up</button>
             </form>
     )}
 }
