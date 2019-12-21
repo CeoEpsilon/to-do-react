@@ -60,6 +60,46 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    fetch('https://assets.breatheco.de/apis/fake/todos/user/cleber', {
+      method: "GET",
+      PARAMS: "None",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    })
+    .then(resp => {
+        console.log("&&&")
+        console.log(resp)
+        console.log(resp.ok); // will be true if the response is successfull
+        console.log(resp.status); // the status code = 200 or code = 400 etc.
+        console.log(resp.text()); // will try return the exact result as string
+        return resp.json(); // (returns promise) will try to parse the result as json as return a promise that you can .then for results
+    })
+    .then(data => {
+        //here is were your code should start after the fetch finishes
+        console.log("***** componentDidMount*****")
+        console.log(data); //this will print on the console the exact object received from the server
+
+        console.log("$$$$$="+data)  
+        let items = data.map(item => item.todo)
+        console.log(items)
+        this.setState({
+          ...this.state,
+          isLoaded: true,
+          //todoList: result.items
+          todoList: items
+        });
+    
+    })
+    .catch(error => {
+        //error handling
+        console.log(error);
+    });
+  }
+
+
+  /*
+  componentDidMount() {
     fetch("http://localhost:8000/todolist/")
       .then(res => { 
         console.log("####"+res)
@@ -90,7 +130,7 @@ class App extends React.Component {
         }
       )
   }
-
+*/
 
   listItem(data) {
     console.log(data)
